@@ -43,12 +43,12 @@ def preprocess(input_path, output_path):
     
     # Merge significant and insignificant errors
     total_mean_errors = pd.merge(
-        sig_mean_errors.rename(columns={'num_errors': 'num_sig_errors'}),
-        insig_mean_errors.rename(columns={'num_errors': 'num_insig_errors'}),
+        sig_mean_errors.rename(columns={'num_errors': 'mean_sig_errors'}),
+        insig_mean_errors.rename(columns={'num_errors': 'mean_insig_errors'}),
         on=['study_number', 'candidate_type']
     )
-    total_mean_errors['total_num_errors'] = (
-        total_mean_errors['num_sig_errors'] + total_mean_errors['num_insig_errors']
+    total_mean_errors['mean_total_errors'] = (
+        total_mean_errors['mean_sig_errors'] + total_mean_errors['mean_insig_errors']
     )
     
     # Create final dataset
@@ -60,9 +60,9 @@ def preprocess(input_path, output_path):
             "candidate_type": row['candidate_type'],
             "gt_report": study_reports_df.iloc[row['study_number']]['gt_report'],
             "pred_report": study_reports_df.iloc[row['study_number']][row['candidate_type']],
-            "num_sig_errors": row['num_sig_errors'],
-            "num_insig_errors": row['num_insig_errors'],
-            "total_num_errors": row['total_num_errors']
+            "mean_sig_errors": row['mean_sig_errors'],
+            "mean_insig_errors": row['mean_insig_errors'],
+            "mean_total_errors": row['mean_total_errors']
         })
     
     # Convert to DataFrame and save
