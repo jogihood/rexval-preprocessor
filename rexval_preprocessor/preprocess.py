@@ -21,12 +21,13 @@ def compute_mean_errors(errors_df, is_significant):
     mean_errors = mean_errors.drop(columns=['error_category'])
     return mean_errors.reset_index()
 
-def preprocess(input_path, output_path):
+def preprocess(input_path, output_path=".", save=True):
     """Preprocess the radiologist error annotation dataset.
     
     Args:
         input_path: Path to the dataset directory containing CSV files
         output_path: Path where the processed CSV will be saved
+        save: Whether to save the processed data to a CSV file
     
     Returns:
         DataFrame containing the processed data
@@ -67,7 +68,7 @@ def preprocess(input_path, output_path):
     
     # Convert to DataFrame and save
     output_df = pd.DataFrame(dataset)
-    if output_path:
+    if save:
         output_path = Path(output_path)
         output_path.mkdir(parents=True, exist_ok=True)
         output_df.to_csv(output_path / "rexval_preprocessed.csv", index=False)
