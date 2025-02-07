@@ -31,12 +31,12 @@ pip install pandas
 ### Command Line Interface
 
 ```bash
-python preprocess.py -i /path/to/dataset/directory -o output.csv
+python preprocess.py -i /path/to/dataset/directory -o /path/to/output/directory
 ```
 
 or with long options:
 ```bash
-python preprocess.py --input_path /path/to/dataset/directory --output_path output.csv
+python preprocess.py --input_path /path/to/dataset/directory --output_path /path/to/output/directory
 ```
 
 ### Python API
@@ -47,7 +47,7 @@ from rexval_preprocessor import preprocess
 # Process the dataset
 df = preprocess(
     input_path="/path/to/dataset/directory",
-    output_path="output.csv"
+    output_path="/path/to/output/directory"
 )
 ```
 
